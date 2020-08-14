@@ -1,20 +1,27 @@
 function editDesctription(){
-  const beerDescription = document.querySelector('.description')//class
-  beerDescription.addEventListener('submit', function(event){
+const beerDescription = document.querySelector('.description')//class
+  //const beerDescription = document.getElementsByClassName('description')//class
+
+
+//Could you please tell me why in this case, line 3 does NOT work but line 2 works? THANK U!
+
+
+
+beerDescription.addEventListener('submit', function(event){
     console.log(event)
-      event.preventDefault()
-      const description = {
+    event.preventDefault()
+    const descri = {
       description: event.target[0].value
       }
-      console.log()
-  const reqObj = {
-      method: 'PATCH',
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
+    //console.log()
+    const reqObj = {
+    method: 'PATCH',
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
       },
-      body: JSON.stringify(description)
-  }
+    body: JSON.stringify(descri)
+    }
   const beerId = event.target.dataset.id  //set to beerID
   fetch(`http://localhost:3000/beers/${beerId} `, reqObj)
   .then(resp => resp.json())
@@ -22,8 +29,8 @@ function editDesctription(){
      //const beerDescriptionField = document.querySelector('.description-field')//class
      const beerDescriptionField = document.getElementsByClassName('description-field')
      beerDescriptionField.innerText = beerDescription
-  })
-  })
+     })
+   })
 
   // get existing description
   // 'submit event listener
@@ -83,9 +90,7 @@ function renderBeers(beers){
     const beerLi = document.createElement('li')
     beerLi.dataset.id = beer.id
     beerLi.innerText = beer.name
-
     ul.append(beerLi)
-
     // grab the ul
     // create a new li for each beer
     // throw that li into the ul
