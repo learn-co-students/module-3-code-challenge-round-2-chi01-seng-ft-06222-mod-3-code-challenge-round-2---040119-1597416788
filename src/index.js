@@ -7,17 +7,18 @@ const beerDescription = document.querySelector('.description')//class
 beerDescription.addEventListener('submit', function(event){
     console.log(event)
     event.preventDefault()
-    const descri = {
-      description: event.target[0].value
-      }
-    //console.log()
+    //console.log(event.target[0].value)
+   
+    
     const reqObj = {
     method: 'PATCH',
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json"
       },
-    body: JSON.stringify(descri)
+    body: JSON.stringify({
+      description: event.target[0].value
+    })
     }
   const beerId = event.target.dataset.id  //set to beerID
   fetch(`http://localhost:3000/beers/${beerId} `, reqObj)
@@ -49,17 +50,16 @@ function createClickListener(){
       fetch(`http://localhost:3000/beers/${beerId}`)
       .then(resp => resp.json())
       .then(beer => {
-        showBeer(beer)
+        DisplayBeerDetail(beer)
       })
 
     }
   })
 }
 
-function showBeer(beer) {
-  const showDetail = document.getElementById('beer-detail')
-  const beerHtml= `
-  <h1>${beer.name}</h1>
+function DisplayBeerDetail(beer) {
+  const beerInfo = document.getElementById('beer-detail')
+  const beerHtml= `<h1>${beer.name}</h1>
   <img src="${beer.image_url}">
   <h3>${beer.tagline}</h3>
   <form class="description" data-id="${beer.id}">
@@ -67,8 +67,8 @@ function showBeer(beer) {
   <button>Save</button>
   </form>`
 //<button id="edit-beer" class="btn btn-info">
-   showDetail.innerHTML = beerHtml
-   editDesctription()
+  beerInfo.innerHTML = beerHtml
+  editDesctription()
   }
 
 
