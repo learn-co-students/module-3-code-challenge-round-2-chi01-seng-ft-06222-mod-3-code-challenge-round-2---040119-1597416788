@@ -1,11 +1,8 @@
 function editDesctription(){
 const beerDescription = document.querySelector('.description')//class
-  //const beerDescription = document.getElementsByClassName('description')//class
-
+//const beerDescription = document.getElementsByClassName('description')//class
 
 //Could you please tell me why in this case, line 3 does NOT work but line 2 works? THANK U!
-
-
 
 beerDescription.addEventListener('submit', function(event){
     console.log(event)
